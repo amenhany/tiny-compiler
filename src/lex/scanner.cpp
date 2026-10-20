@@ -1,5 +1,3 @@
-#include <string>
-#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -55,12 +53,12 @@ namespace tcmp
         {
             line_number++;
 
-            std::stringstream ss(line);
-            std::string word;
+            std::string token;
 
-            while (ss >> word)
+            for (int i = 0; i < line.length(); i++)
             {
-                if (RESERVED_WORDS.find(word) != RESERVED_WORDS.end())
+                token += line[i];
+                if (RESERVED_WORDS.find(token) != RESERVED_WORDS.end())
                 {
                 }
             }

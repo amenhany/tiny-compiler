@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "tcmp/common/token.hpp"
+#include "token.hpp"
 
 namespace tcmp
 {

@@ -1,4 +1,4 @@
-#include "scanner/scanner.cpp"
+#include "lex/scanner.cpp"
 
 using namespace tcmp;
 

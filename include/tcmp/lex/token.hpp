@@ -42,4 +42,9 @@ namespace tcmp
         std::string lexeme;
         int lineNumber;
     };
+
+    bool is_reserved_word(std::string_view lexeme);
+    bool is_symbol(std::string_view lexeme);
+    TokenType get_reserved_word_type(std::string_view lexeme);
+    TokenType get_symbol_type(std::string_view lexeme);
 }
