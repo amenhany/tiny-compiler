@@ -26,19 +26,18 @@ MemoryBuffer::~MemoryBuffer() {
 bool MemoryBuffer::loadFile(const char *filepath) {
   Filepath = filepath;
 #ifdef _WIN32
-  TCHAR *lpFileName = TEXT(filepath);
   HANDLE hFile;
   HANDLE hMap;
   LPVOID lpBasePtr;
   LARGE_INTEGER liFileSize;
 
-  hFile = CreateFile(lpFileName,
-                     GENERIC_READ,          // dwDesiredAccess
-                     0,                     // dwShareMode
-                     NULL,                  // lpSecurityAttributes
-                     OPEN_EXISTING,         // dwCreationDisposition
-                     FILE_ATTRIBUTE_NORMAL, // dwFlagsAndAttributes
-                     0);                    // hTemplateFile
+  hFile = CreateFileA(filepath,
+                      GENERIC_READ,          // dwDesiredAccess
+                      0,                     // dwShareMode
+                      NULL,                  // lpSecurityAttributes
+                      OPEN_EXISTING,         // dwCreationDisposition
+                      FILE_ATTRIBUTE_NORMAL, // dwFlagsAndAttributes
+                      0);                    // hTemplateFile
   if (hFile == INVALID_HANDLE_VALUE) {
     std::cerr << "CreateFile failed with error" << GetLastError() << '\n';
     return false;
@@ -83,8 +82,8 @@ bool MemoryBuffer::loadFile(const char *filepath) {
     return false;
   }
 
-  bufferStart = static_cast<const char *>(lpBasePtr);
-  bufferEnd = bufferStart + liFileSize.QuadPart;
+  BufferStart = static_cast<const char *>(lpBasePtr);
+  BufferEnd = BufferStart + liFileSize.QuadPart;
 
   return true;
 #else
@@ -116,7 +115,6 @@ bool MemoryBuffer::loadFile(const char *filepath) {
   BufferEnd = BufferStart + size;
 
   return true;
+#endif
 }
 } // namespace tc
-
-#endif

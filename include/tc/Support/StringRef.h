@@ -2,6 +2,7 @@
 #define TC_SUPPORT_STRINGREF_H
 
 #include <cstddef>
+#include <cstring>
 #include <string>
 
 namespace tc {
@@ -61,7 +62,7 @@ inline bool operator==(StringRef LHS, StringRef RHS) {
     return false;
   if (LHS.empty())
     return true;
-  return memcmp(LHS.data(), RHS.data(), LHS.size()) == 0;
+  return std::memcmp(LHS.data(), RHS.data(), LHS.size()) == 0;
 }
 } // namespace tc
 
