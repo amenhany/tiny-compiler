@@ -29,8 +29,21 @@ public:
   /*implicit*/ StringRef(const std::string &Str)
       : _data(Str.data()), length(Str.length()) {}
 
-  /// @name StringRef Comparison Operators
-  /// @{
+  /// @name StringRef Case-insensitive Comparison Operator
+  /// sets the 6th bit which is lowercase for ASCII chars
+  bool equals_insensitive(StringRef other) const {
+    if (length != other.length)
+      return false;
+
+    for (size_t i = 0; i < other.length; ++i) {
+      char c1 = _data[i] | 0x20;
+      char c2 = other._data[i] | 0x20;
+
+      if (c1 != c2)
+        return false;
+    }
+    return true;
+  }
 
   iterator begin() const { return data(); }
   iterator end() const { return data() + size(); }
@@ -64,6 +77,8 @@ inline bool operator==(StringRef LHS, StringRef RHS) {
     return true;
   return std::memcmp(LHS.data(), RHS.data(), LHS.size()) == 0;
 }
+
+/// @}
 } // namespace tc
 
 #endif

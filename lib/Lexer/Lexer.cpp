@@ -125,21 +125,21 @@ Token Lexer::lexIdentifier(const char *tokStart) {
     ++curPtr;
 
   StringRef str(tokStart, curPtr - tokStart);
-  if (str == "if")
+  if (str.equals_insensitive("if"))
     return Token(Token::IF, str);
-  else if (str == "then")
+  else if (str.equals_insensitive("then"))
     return Token(Token::THEN, str);
-  else if (str == "else")
+  else if (str.equals_insensitive("else"))
     return Token(Token::ELSE, str);
-  else if (str == "end")
+  else if (str.equals_insensitive("end"))
     return Token(Token::END, str);
-  else if (str == "repeat")
+  else if (str.equals_insensitive("repeat"))
     return Token(Token::REPEAT, str);
-  else if (str == "until")
+  else if (str.equals_insensitive("until"))
     return Token(Token::UNTIL, str);
-  else if (str == "read")
+  else if (str.equals_insensitive("read"))
     return Token(Token::READ, str);
-  else if (str == "write")
+  else if (str.equals_insensitive("write"))
     return Token(Token::WRITE, str);
   else
     return Token(Token::ID, str);
